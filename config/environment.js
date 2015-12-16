@@ -1,3 +1,8 @@
+/**
+ * Copyright 2015, Yahoo! Inc.
+ * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+ */
+
 /* jshint node: true */
 
 module.exports = function(environment) {
@@ -16,6 +21,13 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+    contentSecurityPolicyHeader: 'Content-Security-Policy-Report-Only',
+    contentSecurityPolicy: {
+      'img-src': "'self' https://camo.githubusercontent.com data:",
+      'font-src': "'self' https://fonts.gstatic.com https://fonts.gstatic.com https://maxcdn.bootstrapcdn.com",
+      'style-src': "'self' 'unsafe-inline' https://fonts.googleapis.com https://maxcdn.bootstrapcdn.com https://google-code-prettify.googlecode.com",
+      'script-src': "'self' 'unsafe-inline' 'unsafe-eval' localhost:35729 0.0.0.0:35729 https://maxcdn.bootstrapcdn.com https://google-code-prettify.googlecode.com"
     }
   };
 
@@ -37,10 +49,6 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
-  }
-
-  if (environment === 'production') {
-
   }
 
   return ENV;
