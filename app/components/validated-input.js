@@ -41,6 +41,19 @@ export default Ember.Component.extend({
     run.debounce(this, this.setValue, 500, false);
   }),
 
+  /**
+   * When we reset the form, we manually set `value` so we have to make sure to propogate that change
+   * to the input field
+   */
+  syncRawInputValue: observer('value', function() {
+    let value = this.get('value');
+    let rawInputValue = this.get('rawInputValue');
+
+    if(value !== rawInputValue) {
+      this.set('rawInputValue', value);
+    }
+  }),
+
   showMessage: computed('attributeValidation.isDirty', 'isInvalid', 'didValidate', function() {
     return (this.get('attributeValidation.isDirty') || this.get('didValidate')) && this.get('isInvalid');
   }),
